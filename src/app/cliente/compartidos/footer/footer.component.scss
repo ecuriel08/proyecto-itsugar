@@ -1,0 +1,34 @@
+.main-footer{
+
+    background-color: #FFF1ED;
+    justify-content: space-between;
+    height: 65px;
+    width: 100vw;
+    padding: 0 33vw;
+    color: #000;
+    text-decoration: none;
+
+    ul{
+      text-align: center;
+    }
+
+    .footer-links{
+        display: flex;
+        list-style: none;
+        .footer-link{
+            a{
+              margin: .9rem;
+              padding: .1rem .9rem;
+              color: #000;
+              font-size: 40px;
+            
+            }
+            a:hover{
+              color: #384C72;
+            }
+            a:active{
+              color: #384C72;
+            }
+        }
+    }
+}

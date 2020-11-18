@@ -1,0 +1,13 @@
+<br><br><br><br><br>
+<div *ngIf='carritoItems.length === 0'class="alert alert-info">El carrito esta vacio</div>
+
+<ul *ngIf='carritoItems.length > 0'class="list-group">
+    <li class="list-group-item" *ngFor="let item of carritoItems">
+        <app-items-carrito [carritoItem]="item"></app-items-carrito>
+    </li>
+    <li class="list-group-item-active">
+        <strong>Precio Total</strong> {{ carritoTotal | currency: 'USD' }} 
+    </li>
+</ul>
+<br><br><br><br><br>
+ 
