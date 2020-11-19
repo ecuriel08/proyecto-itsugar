@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-registrarse',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrarseComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authService: AuthService) { }
+
+  isSignedIn = false
 
   ngOnInit(): void {
+
   }
+
+  async onSignup(email:string,password:string){
+    await this.authService.singUp(email,password)
+    if(this.authService.isLoggedIn)
+    this.isSignedIn = true
+  } 
 
 }

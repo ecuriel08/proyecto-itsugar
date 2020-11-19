@@ -1,1 +1,28 @@
-<p>registrarse works!</p>
+<br><br><br>
+<body class="text-center" *ngIf='!isSignedIn'>
+    <div class="container">
+        <div class="card text-center" style="width: 18rem;">
+            <div class="card-body">
+                <form class="form-signin" >
+                    <img class="mb-4" src="../../../assets/img/iso.jpg" alt="" width="72" height="72">
+                    <h1 class="h3 mb-3 font-weight-normal">Registrate</h1>
+                    <label for="inputEmail">Email </label>
+                    <!--EMAIL SIGNUP-->
+                    <input type="text" #emailSignup id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+
+                    <label for="inputPassword">Password</label>
+                    <!--PASSWORD SIGNUP-->
+
+                    <input type="text" #passwordSignup id="inputPassword" class="form-control" placeholder="Password" required>
+
+                    <div class="mb-3">
+                        <p></p>
+                        <p>Ya tienes cuenta?</p>
+                      <a routerLink = '/login'>Inicia Sesion</a>
+                    </div>
+                    <button class="btn btn-primary btn-block" type="submit" (click)='onSignup(emailSignup.value,passwordSignup.value)'>Registrarse</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

@@ -4,11 +4,14 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
+    font-family: Raleway;
 }
 
 body {
     margin: 0px;
     padding: 0px;
-    background-color: #FFB3C0;
+    background-color: #FFB3C0 !important;
     text-decoration: none;
 }
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

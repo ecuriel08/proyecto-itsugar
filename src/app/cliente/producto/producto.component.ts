@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
 import { MessengerService } from 'src/app/services/messenger.service';
+import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
   selector: 'app-producto',
@@ -11,7 +12,8 @@ export class ProductoComponent implements OnInit {
 
   @Input() productoItem: Producto
 
-  constructor(private msg: MessengerService) { }
+  constructor(private msg: MessengerService,
+    private firebaseService: FirebaseService) { }
 
   ngOnInit(): void {
   }
@@ -20,5 +22,6 @@ export class ProductoComponent implements OnInit {
     this.msg.sendMsg(this.productoItem)
     
   }
+  
 
 }
