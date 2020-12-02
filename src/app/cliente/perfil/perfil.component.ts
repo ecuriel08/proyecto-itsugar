@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from 'firebase';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,17 +9,34 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
+  isAuthenticated = false;
+  user: User = null;
 
-  @Output() isLogout = new EventEmitter<void>()
-
-  constructor(public authService: AuthService) { }
+  constructor(
+    public authService: AuthService,
+    public router: Router) { }
 
   ngOnInit(): void {
+    this.getCurrentUser();
   }
 
-  logOut(){
-    this.authService.logOut()
-    this.isLogout.emit()
+  getCurrentUser(): void{
+    this.authService.getCurrentUser().subscribe(response =>{
+      if (response){
+        this.isAuthenticated = true;
+        this.user = response;
+        return;
+      }
+      this.isAuthenticated = false;
+      this.user = null;
+    })
   }
+
+  logout(): void{
+    this.authService.logout().then(()=>{
+      this.router.navigate(['/'])
+    });
+  }
+
 
 }

@@ -1,8 +1,7 @@
 <div>
     <header class="main-header">
       <div>
-        <!-- <img src="../../../assets/images/logo.jpg" -->
-        <a routerLink="/home"><img src="../../../../assets/img/logo.jpg" width="250" height="90"></a>
+        <a routerLink="/"><img src="../../../../assets/img/logo.jpg" width="250" height="90"></a>
       </div>
       <input type="checkbox" class="menu-btn" id='menu-btn'>
       <label for="menu-btn" class="menu-icon">
@@ -18,7 +17,10 @@
         <li class="nav-link">
           <a routerLink="/nosotros" >NOSOTROS</a>
         </li>
-        <li class="nav-link">
+        <li class="nav-link" *ngIf=isAuthenticated>
+          <a routerLink="/perfil" id="menu-icon"><i class="far fa-user"></i></a>
+        </li>
+        <li class="nav-link" *ngIf=!isAuthenticated>
           <a routerLink="/login" id="menu-icon"><i class="far fa-user"></i></a>
         </li>
         <li class="nav-link">
@@ -27,3 +29,4 @@
       </ul>
     </header>
   </div> 
+<br><br><br><br>

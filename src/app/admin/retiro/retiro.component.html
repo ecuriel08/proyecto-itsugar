@@ -1,0 +1,52 @@
+<section class="jumbotron text-center">
+    <div class="crear-producto">
+      <h2>METODOS DE RETIRO</h2>
+      <button type="button" class="btn btn-success" (click)='open(content)'>Crear nuevo metodo de Retiro</button>
+      <table class="table">
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+              </tr>
+          </thead>
+      <tbody>
+      <tr *ngFor="let item of retirosCollection.data | paginate: config">
+          <td>{{ item.idFirebase }}</td>
+          <td>{{ item.nombre }}</td>
+          <td>
+              <button type="button" class="btn btn-primary" (click)='openEditar(content,item)'>Editar</button>
+              <button type="button" class="btn btn-danger" (click)="eliminarRetiro(item)">Eliminar</button>
+          </td>
+      </tr>
+      </tbody>
+  </table>
+  <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+  
+  <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Metodo de retiro Crear/Update</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+  
+            <form [formGroup]="retiroForm">
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type='text' formControlName="nombre" class="form-control">
+              </div>
+            </form>
+            
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="guardarRetiro()" *ngIf="!actualizar">Guardar</button>
+        <button type="button" class="btn btn-outline-dark" (click)="actualizarRetiro()" *ngIf="actualizar">Actualizar</button>
+      </div>
+    </ng-template>
+  </div>
+</section>

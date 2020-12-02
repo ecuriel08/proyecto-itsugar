@@ -1,6 +1,24 @@
 <div class="row">
-    <div class="col-md-4" *ngFor="let producto of listaProductos" >
-      <app-producto [productoItem]="producto"></app-producto>
+    <div class="col-md-4" *ngFor="let item of productosCollection.data" >
+
+
+      <div class="card mb-4 shadow-sm">
+        <img class="bd-placeholder-img card-img-top" width="100%" height="150" [src]="item.imagenurl" >
+        <div class="card-body">
+            <p>
+                <strong>{{ item.precio | currency: 'USD'}} x 50gr</strong>
+            </p>
+          <p class="card-text">Nombre: {{ item.nombre }}</p>
+          <p class="card-text">Categoria: {{ item.categoria }}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-outline-secondary" routerLink="/detalle/{{item.idFirebase}}">
+                Detalles
+              </button>
+            </div>
+        </div>
+    </div>
+
+
     </div>
 </div>
-

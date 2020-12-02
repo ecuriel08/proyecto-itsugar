@@ -1,32 +1,65 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/Auth';
+import { Router } from '@Angular/router';
+import { Observable, of } from 'rxjs';
+import '@firebase/auth';
+import { auth, User } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  isLoggedIn = false
-  constructor(public firebaseAuth : AngularFireAuth) { }
-  
-  async singIn(email: string, password: string){
-    await this.firebaseAuth.signInWithEmailAndPassword(email,password)
-    .then(res=>{
-      this.isLoggedIn = true
-      localStorage.setItem('user',JSON.stringify(res.user))
-    })
-  }
+  constructor(
+    private firebaseAuth : AngularFireAuth,
+    private router: Router) { }
 
-  async singUp(email: string, password: string){
-    await this.firebaseAuth.createUserWithEmailAndPassword(email,password)
-    .then(res=>{
-      this.isLoggedIn = true
-      localStorage.setItem('user',JSON.stringify(res.user))
-    })
-  }
+    // INICIO CON GOOGLE
 
-  logOut(){
-    this.firebaseAuth.signOut()
-    localStorage.removeItem('user')
-  }
+    loginWithGoogle(): Promise<void>{
+      return this.authLogin(new auth.GoogleAuthProvider()).then((response) =>{
+        localStorage.setItem('user',JSON.stringify(response.user))
+        this.router.navigate(['/'])
+      }) 
+    }
+
+    // INICIO y REGISTRO CON CORREO Y CONTRASEÑA
+
+    loginWithEmail(email: string, password: string): Promise<void>{
+      return this.firebaseAuth.signInWithEmailAndPassword(email, password).then(response=>{
+        if(response){
+          localStorage.setItem('user',JSON.stringify(response.user));
+        }
+      });
+    }
+
+
+    signUpWithCredentials(email: string, password: string): Promise<void> {
+      return this.firebaseAuth.createUserWithEmailAndPassword(email, password).then((response) =>{
+        if(response){
+          localStorage.setItem('user',JSON.stringify(response.user));
+        }
+      });
+    }
+
+    getCurrentUser(): Observable<User> {
+      return this.firebaseAuth.authState;
+    }
+
+    isAuthenticated(): boolean{
+      const user: User = JSON.parse(localStorage.getItem('user')) ?? null;
+      return user !== null;
+    }
+
+    logout(): Promise<void>{
+      return this.firebaseAuth.signOut().then(()=>{
+        localStorage.removeItem('user');
+
+      }).catch(err => console.log(err))
+    }
+
+    private authLogin(provider: auth.AuthProvider): Promise<auth.UserCredential>{
+      return this.firebaseAuth.signInWithPopup(provider)
+    }
+
 }

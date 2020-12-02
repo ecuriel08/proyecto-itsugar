@@ -1,0 +1,12 @@
+.card{
+
+    border: 2px solid #000000;
+
+    .btn {
+        border: 0.5px solid #000000;
+        .btn:active{
+            background-color: indianred;
+
+        }
+    }
+}

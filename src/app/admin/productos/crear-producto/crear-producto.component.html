@@ -7,18 +7,18 @@
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
+                <th>Categoria</th>
                 <th>Descripcion</th>
-                <th>Precio</th>
-                <th>Imagen Url</th>
+                <th>Precio 50g</th>
             </tr>
         </thead>
     <tbody>
     <tr *ngFor="let item of productosCollection.data | paginate: config">
-        <td>{{ item.id }}</td>
+        <td>{{ item.idFirebase }}</td>
         <td>{{ item.nombre }}</td>
+        <td>{{ item.categoria }}</td>
         <td>{{ item.descripcion }}</td>
         <td>{{ item.precio }}</td>
-        <td>{{ item.imagenurl }}</td>
         <td>
             <button type="button" class="btn btn-primary" (click)='openEditar(content,item)'>Editar</button>
             <button type="button" class="btn btn-danger" (click)="eliminarProducto(item)">Eliminar</button>
@@ -41,19 +41,23 @@
 
           <form [formGroup]="productoForm">
             <div class="form-group">
-              <label>Id</label>
-              <input type='number' formControlName="id" class="form-control">
-            </div>
-            <div class="form-group">
               <label>Nombre</label>
               <input type='text' formControlName="nombre" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Categoria</label>
+              <select name="categoria" formControlName="categoria" class="form-control">
+                <option *ngFor="let item of categoriasCollection.data">
+                  {{ item.nombre }}
+                </option>               
+              </select>
             </div>
             <div class="form-group">
               <label>Descripcion</label>
               <input type='text' formControlName="descripcion" class="form-control">
             </div>
             <div class="form-group">
-              <label>Precio</label>
+              <label>Precio $</label>
               <input type='number' formControlName="precio" class="form-control">
             </div>
             <div class="form-group">

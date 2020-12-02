@@ -22,6 +22,13 @@
             //arreglar esto para que no se vea azul
         //}
     }
+    .google{
+        background-color: #FFF1ED;
+        color: #000;
+        border: 2px solid #000000;
+        border-radius: 10px;
+        transition: none;
+    }
 }
 
 .input{
@@ -32,6 +39,19 @@
     border-radius: 10px;
 }
 
+ng-template{
+    position: flex;
+    padding: 5%;
+    align-items: center;
+    text-anchor: middle;
+    width: 475px;
+    background-color: #FFB3C0;
+    color: #000;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    transition: none;
+
+}
 
 /*
 .button{

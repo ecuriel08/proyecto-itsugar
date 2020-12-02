@@ -1,21 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { Producto } from 'src/app/models/producto';
-import { ProductoService } from 'src/app/services/producto.service';
-import { FirebaseService } from '../../services/firebase.service';
+import { ActivatedRoute } from '@angular/router';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
-  selector: 'app-lista-productos',
-  templateUrl: './lista-productos.component.html',
-  styleUrls: ['./lista-productos.component.scss']
+  selector: 'app-detalles-producto',
+  templateUrl: './detalles-producto.component.html',
+  styleUrls: ['./detalles-producto.component.scss']
 })
-export class ListaProductosComponent implements OnInit {
+export class DetallesProductoComponent implements OnInit {
 
+  productoId: any;
   productosCollection = { count: 0, data: []}
 
-  constructor(private productoService: ProductoService,
+  constructor(
+    private route:ActivatedRoute,
     private firebaseService: FirebaseService) { }
 
-  ngOnInit() {
+
+  ngOnInit(): void {
+
+    this.productoId = this.route.snapshot.paramMap.get('pId');
 
     this.firebaseService.getProductos().subscribe(resp=>{
       this.productosCollection.data = resp.map((e:any)=>{
@@ -33,9 +37,12 @@ export class ListaProductosComponent implements OnInit {
         console.error(error);
       }
     );
+
+
     
+
+
   }
 
 
 }
-

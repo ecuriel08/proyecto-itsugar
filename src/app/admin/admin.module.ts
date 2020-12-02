@@ -13,12 +13,17 @@ import { CrearProductoComponent } from './productos/crear-producto/crear-product
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { AdminNavbarComponent } from './admin-navbar/admin-navbar.component';
+import { CategoriasComponent } from './categorias/categorias.component';
+import { PagosComponent } from './pagos/pagos.component';
+import { RegistrosComponent } from './registros/registros.component';
+import { RetiroComponent } from './retiro/retiro.component';
 
 
 
 
 @NgModule({
-  declarations: [AdminLayoutComponent, CrearProductoComponent,],
+  declarations: [AdminLayoutComponent, CrearProductoComponent, AdminNavbarComponent, CategoriasComponent, PagosComponent, RegistrosComponent, RetiroComponent,],
   imports: [
     CommonModule,
     AdminRoutingModule,

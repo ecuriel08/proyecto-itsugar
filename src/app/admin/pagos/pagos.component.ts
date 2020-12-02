@@ -1,23 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { FirebaseService } from '../../../services/firebase.service';
-import { Producto } from 'src/app/models/producto';
+import { FirebaseService } from 'src/app/services/firebase.service';
 import { isNullOrUndefined } from 'util';
 
 @Component({
-  selector: 'app-crear-producto',
-  templateUrl: './crear-producto.component.html',
-  styleUrls: ['./crear-producto.component.scss']
+  selector: 'app-pagos',
+  templateUrl: './pagos.component.html',
+  styleUrls: ['./pagos.component.scss']
 })
-export class CrearProductoComponent implements OnInit {
+export class PagosComponent implements OnInit {
 
   config: any;
-  productosCollection = { count: 0, data: []}
-  categoriasCollection = { count: 0, data: []}
+  pagosCollection = { count: 0, data: []}
   closeResult = '';
 
-  productoForm: FormGroup;
+  pagoForm: FormGroup;
 
   idFirebaseActualizar: string;
   actualizar: boolean;
@@ -30,44 +28,23 @@ export class CrearProductoComponent implements OnInit {
 
   ngOnInit(): void {
 
-  
-    this.firebaseService.getCategoria().subscribe(resp=>{
-      this.categoriasCollection.data = resp.map((e:any)=>{
-        return{
-          nombre: e.payload.doc.data().nombre,
-        }
-      })
-    },
-      error=>{
-        console.error(error);
-      }
-    );
-
     this.idFirebaseActualizar ='';
     this.actualizar = false;
 
     this.config = {
       itemsPerPage : 10,
       currentPage: 1,
-      totalItems: this.productosCollection.count
+      totalItems: this.pagosCollection.count
     };
 
-    this.productoForm = this.fb.group({
+    this.pagoForm = this.fb.group({
       nombre:['',Validators.required],
-      categoria:['',Validators.required],
-      descripcion:['',Validators.required],
-      precio:['',Validators.required],
-      imagenurl:['',Validators.required]
     });
 
-    this.firebaseService.getProductos().subscribe(resp=>{
-      this.productosCollection.data = resp.map((e:any)=>{
+    this.firebaseService.getPago().subscribe(resp=>{
+      this.pagosCollection.data = resp.map((e:any)=>{
         return{
           nombre: e.payload.doc.data().nombre,
-          categoria: e.payload.doc.data().categoria,
-          descripcion: e.payload.doc.data().descripcion,
-          precio:e.payload.doc.data().precio,
-          imagenurl:e.payload.doc.data().imagenurl,
           idFirebase: e.payload.doc.id
         }
       })
@@ -83,14 +60,14 @@ export class CrearProductoComponent implements OnInit {
     this.config.currentPage = event
   }
 
-  eliminarProducto(item:any):void{
-    this.firebaseService.deleteProducto(item.idFirebase);
+  eliminarPago(item:any):void{
+    this.firebaseService.deletePago(item.idFirebase);
   }
 
-  guardarProducto():void{
+  guardarPago():void{
 
-    this.firebaseService.crearProducto(this.productoForm.value).then(resp=>{
-      this.productoForm.reset();
+    this.firebaseService.crearPago(this.pagoForm.value).then(resp=>{
+      this.pagoForm.reset();
       this.modalService.dismissAll();
     }).catch(error =>{
       console.error(error)
@@ -98,10 +75,10 @@ export class CrearProductoComponent implements OnInit {
     
   }
 
-  actualizarProducto(){
+  actualizarPago(){
     if(!isNullOrUndefined(this.idFirebaseActualizar)){
-      this.firebaseService.updateProducto(this.idFirebaseActualizar,this.productoForm.value).then(resp =>{
-        this.productoForm.reset();
+      this.firebaseService.updatePago(this.idFirebaseActualizar,this.pagoForm.value).then(resp =>{
+        this.pagoForm.reset();
         this.modalService.dismissAll();
       }).catch(error=>{
         console.error(error);
@@ -111,14 +88,9 @@ export class CrearProductoComponent implements OnInit {
 
   openEditar(content,item:any) {
 
-    this.productoForm.setValue({
+    this.pagoForm.setValue({
       nombre: item.nombre,
-      categoria: item.categoria,
-      descripcion: item.descripcion,
-      precio: item.precio,
-      imagenurl: item.imagenurl,
     });
-
     this.idFirebaseActualizar = item.idFirebase;
     this.actualizar = true;
 
@@ -147,6 +119,5 @@ export class CrearProductoComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
 
 }

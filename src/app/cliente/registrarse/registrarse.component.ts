@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,18 +10,32 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegistrarseComponent implements OnInit {
 
-  constructor(public authService: AuthService) { }
+  signupForm: FormGroup = null;
 
-  isSignedIn = false
+  constructor(
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private router: Router) { }
 
   ngOnInit(): void {
-
+    this.signupForm = this.fb.group({
+      email: '',
+      password: '',
+    });
+  }
+  
+  onSubmit():void {
+    console.log({
+      email: this.signupForm.get('email').value,
+      password: this.signupForm.get('password').value,
+    });
+    this.authService.signUpWithCredentials(
+      this.signupForm.get('email').value,
+      this.signupForm.get('password').value
+    ).then(()=>{
+      this.router.navigate(['/']);
+    })
   }
 
-  async onSignup(email:string,password:string){
-    await this.authService.singUp(email,password)
-    if(this.authService.isLoggedIn)
-    this.isSignedIn = true
-  } 
 
 }
