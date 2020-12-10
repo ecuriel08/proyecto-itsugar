@@ -9,3 +9,39 @@
 .segundo{
     background-color: #ffffff !important;
 }
+.far{
+    font-size: 50px;
+    color: #000000;
+}
+.jumbotron{
+    background-color: #ffffff;
+    p{
+        font-size: 20px;
+    }
+
+}
+.foto{
+    border: 30px solid,#000000;
+}
+.btn-primary{
+    background-color: #FFB3C0;
+    color: #000;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    transition: none;
+}
+.btn-secondary{
+    background-color: #FFF1ED;
+    color: #000;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    transition: none;
+}
+
+.btn-info{
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    color: #000;
+    border-radius: 10px;
+    transition: none;
+}

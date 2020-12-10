@@ -1,14 +1,22 @@
 .jumbotron{
-    background-color: transparent;
+    background-color: transparent !important;
 
     img{
         display: block;
         margin-left: auto;
         margin-right: auto;
         width: 50%;
+        border-radius: 135px;
     }
 
     p{
         padding: 30px;
+        background-color: #F5D7D7;
+        border-radius: 20px;
+        font-family: Raleway;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 47px;
     }
 }

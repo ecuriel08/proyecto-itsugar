@@ -12,7 +12,7 @@
           <a routerLink = '/'>HOME</a>
         </li>
         <li class="nav-link">
-          <a routerLink="/catalogo">CATALOGO</a>
+          <a routerLink="/catalogo">CATÁLOGO</a>
         </li>
         <li class="nav-link">
           <a routerLink="/nosotros" >NOSOTROS</a>
@@ -23,8 +23,8 @@
         <li class="nav-link" *ngIf=!isAuthenticated>
           <a routerLink="/login" id="menu-icon"><i class="far fa-user"></i></a>
         </li>
-        <li class="nav-link">
-          <a routerLink="/carrito" id="menu-icon"><i class="fas fa-shopping-cart"></i></a>
+        <li class="nav-link" *ngIf=isAuthenticated>
+          <a routerLink="/carrito/{{user.uid}}" id="menu-icon"><i class="fas fa-shopping-cart"></i></a>
         </li>
       </ul>
     </header>

@@ -8,6 +8,7 @@ import { DetallesProductoComponent } from './detalles-producto/detalles-producto
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { NosotrosComponent } from './nosotros/nosotros.component';
+import { PagarComponent } from './pagar/pagar.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { RegistrarseComponent } from './registrarse/registrarse.component';
 
@@ -16,30 +17,15 @@ const routes: Routes = [
     path: '', component: ClienteLayoutComponent, children: [
       { path: '', component: HomeComponent },
       { path: 'nosotros', component: NosotrosComponent},
-      { path: 'carrito', canActivate: [AuthGuard],component: CarritoComponent},
+      { path: 'carrito/:uId', canActivate: [AuthGuard],component: CarritoComponent},
       { path: 'catalogo', component: CatalogoComponent},
       { path: 'login', component: LoginComponent},
       { path: 'perfil', component: PerfilComponent},
       { path: 'registrarse', component: RegistrarseComponent},
+      { path: 'pagar/:bId', component: PagarComponent},
       { path: 'detalle/:pId', component: DetallesProductoComponent},
-      /* { path: 'buscar', component: BuscarComponent },
-      { path: 'destinos', component: DestinoComponent },
-      { path: 'destinos/:destinoId', component: SelectedDestinoComponent },
-      { path: 'categoria/:categoryId', component: DestinoComponent },    
-      { path: 'hoteles', component: HotelesComponent },
-      { path: 'hoteles/:stateId/estado', component: HotelesComponent },
-      { path: 'hoteles/:hotelId', component: SelectedHotelComponent },
-      { path: 'itinerario/crear', component: CreateItinerarioComponent },
-      { path: 'itinerario/:idRoom/hotel', component: CreateItinerarioComponent },
-      { path: 'itinerario/ver', component: ShowItinerarioComponent },
-      { path: 'carrito' , component: CartComponent },
-      { path: 'estados', component: EstadosComponent},
-      { path: 'estados/:stateId', component: DestinoComponent},
-      { path: 'categoria', component: CategoryComponent},
+    
     ]
-  },
-  { path: 'login', component: LoginComponent }, */
-  ]
   },
 ];
 

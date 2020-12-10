@@ -101,4 +101,24 @@ export class FirebaseService {
   deleteRegistro(idFirebase:any){
     return this.firestore.collection('registros').doc(idFirebase).delete();
   }
+
+  //CREAR BOLSAS
+
+  getBolsa(){
+    return this.firestore.collection('bolsas').snapshotChanges();
+  }
+
+  crearBolsa(bolsa:any){
+    return this.firestore.collection('bolsas').add(bolsa);
+  }
+
+  updateBolsa(idFirebase:any, bolsa:any){
+    return this.firestore.collection('bolsas').doc(idFirebase).update(bolsa);
+  }
+
+  deleteBolsa(idFirebase:any){
+    return this.firestore.collection('bolsas').doc(idFirebase).delete();
+  }
+
+
 }

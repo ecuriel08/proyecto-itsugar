@@ -110,7 +110,6 @@ export class CrearProductoComponent implements OnInit {
   }
 
   openEditar(content,item:any) {
-
     this.productoForm.setValue({
       nombre: item.nombre,
       categoria: item.categoria,

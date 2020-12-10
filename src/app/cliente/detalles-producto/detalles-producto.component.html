@@ -1,19 +1,80 @@
-
-<p>detalles-producto works!</p>
-
-<div  class="primero text-center" *ngFor="let item of productosCollection.data">
-    <div class="col-md-12" *ngIf="item.idFirebase === productoId">
-      <div class=" segundo row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 ">
-        <div class="col-auto d-none d-lg-block">
-            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-        </div>
-        <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">World</strong>
-          <h3 class="mb-0">{{ item.nombre }}</h3>
-          <div class="mb-1 text-muted">{{ item.categoria }}</div>
-          <p class="card-text mb-auto">{{ item.descripcion }}</p>
-          <a href="#" class="stretched-link">Continue reading</a>
-        </div>
+<div *ngFor="let item of productosCollection.data">
+  <div class="jumbotron" *ngIf="item.idFirebase === productoId"> 
+    <h2 class="display-6"><strong>Detalles de producto</strong></h2> 
+    <br>
+    <div class="container row">
+      <div class="col foto">
+        <img style="border: 2px solid; color: rgb(0, 0, 0);" src="{{item.imagenurl}}" width="340" height="300">
+      </div>
+      <div class="col-md-8">
+        <p>Nombre: {{ item.nombre }}</p>
+        <p>Categoria: {{ item.categoria }}</p>
+        <p>Precio: {{ item.precio | currency: 'USD'}} x 50gr</p>
+        <p>Descripcion: {{ item.descripcion }}</p> 
       </div>
     </div>
+    <br>
+    <p align="right" >
+      <button class="btn btn-primary btn-lg" (click)='open(content)' *ngIf=isAuthenticated type="submit" >Crear una bolsa</button>
+    </p> 
+    <p align="left" ><a class="btn btn-secondary" routerLink="/catalogo" role="button">Buscar mas</a></p>
+
+    <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Crear Bolsa</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+  
+            <form [formGroup]="bolsaForm">
+              <div class="form-group">
+                <label>Nombre</label>
+                <input type='text' formControlName="nombre" class="form-control">
+              </div>
+              <div class="form-group " >
+                <label>ID Usuario</label>
+                <select name="categoria" formControlName="uid" class="form-control">
+                  <option value="{{user.uid}}">
+                    {{user.uid}}
+                  </option>               
+                </select>
+              </div>
+              <div class="form-group " >
+                <label>Producto</label>
+                <select name="categoria" formControlName="producto" class="form-control">
+                  <option value="{{item.nombre}}">
+                    {{item.nombre}}
+                  </option>               
+                </select>
+              </div>
+              <div class="form-group " >
+                <label>Cantidad</label>
+                <select type='number' name="categoria" formControlName="peso" class="form-control">
+                  <option *ngFor="let peso of pesos">
+                    {{peso}} gr
+                  </option>               
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Precio = {{item.precio}} </label>
+                <select type='number' name="categoria" formControlName="precio" class="form-control">
+                  <option value="{{item.precio}}">
+                    {{item.precio}}
+                  </option>               
+                </select>
+              </div>
+            </form>
+  
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="guardarBolsa()" *ngIf="!actualizar">Guardar</button>
+      </div>
+    </ng-template>
+  </div>
 

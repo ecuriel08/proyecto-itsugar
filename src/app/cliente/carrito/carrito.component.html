@@ -1,13 +1,21 @@
-
-<div *ngIf='carritoItems.length === 0'class="alert alert-info">El carrito esta vacio</div>
-
-<ul *ngIf='carritoItems.length > 0'class="list-group">
-    <li class="list-group-item" *ngFor="let item of carritoItems">
-        <app-items-carrito [carritoItem]="item"></app-items-carrito>
-    </li>
-    <li class="list-group-item-active">
-        <strong>Precio Total</strong> {{ carritoTotal | currency: 'USD' }} 
-    </li>
-</ul>
-<br><br><br><br><br>
- 
+<h2 class="display-4"><strong>Carrito de compras</strong></h2>
+<div *ngFor="let item of bolsasCollection.data">
+  <div class="jumbotron" *ngIf='item.uid===clienteId'> 
+    <br>
+    <div class="container row">
+        <div class="col foto">
+            <img src='../../../assets/img/bag.jpg' width="150" height="150">
+          </div>
+      <div class="col-md-8">
+        <p><strong>Bolsa:</strong> {{ item.nombre }}</p>
+        <p><strong>Peso:</strong> {{ item.peso }}</p> 
+        <p><strong>Contenido:</strong> {{ item.producto }}</p>
+        <p><strong>Precio Total:</strong> {{ ((item.peso/ 50) * item.precio)  }}</p> 
+      </div>
+      <div class="col">
+        <br><br><br>
+        <p><a class="btn btn-primary" routerLink="/pagar/{{item.idFirebase}}" role="button">Pagar</a></p>
+      </div>
+    </div>
+    <br>
+</div>

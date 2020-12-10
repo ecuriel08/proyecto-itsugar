@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
       email:'',
       password:'',
     });
+
   }
 
   onSubmit(): void{
@@ -40,6 +41,7 @@ export class LoginComponent implements OnInit {
       this.loginForm.get('password').value,
       ).then(()=>{
         this.router.navigate(['/'])
+        
       })
   }
 

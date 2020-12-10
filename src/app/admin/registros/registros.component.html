@@ -1,1 +1,68 @@
-<p>registros works!</p>
+<section class="jumbotron text-center">
+    <div class="crear-producto">
+      <h2>REGISTROS</h2>
+      <table class="table">
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Usuario</th>
+                  <th>M. pago</th>
+                  <th>M. Retiro</th>
+                  <th>Direccion</th>
+                  <th>Estado</th>
+              </tr>
+          </thead>
+      <tbody>
+      <tr *ngFor="let item of registrosCollection.data | paginate: config">
+          <td>{{ item.idFirebase }}</td>
+          <td>{{ item.uid }}</td>
+          <td>{{ item.mpago }}</td>
+          <td>{{ item.mretiro }}</td>
+          <td>{{ item.direccion }}</td>
+          <td>{{ item.estado }}</td>
+
+          <td>
+              <button type="button" class="btn btn-primary" (click)='openEditar(content,item)'>Editar</button>
+          </td>
+      </tr>
+      </tbody>
+  </table>
+  <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+  
+  <ng-template #content let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Actualizar estado Registro</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+  
+            <form [formGroup]="registroForm">
+              <div class="form-group">
+                <label>Estado</label>
+                <select formControlName="estado" class="form-control">
+                    <option>
+                        Entregado
+                    </option>
+                    <option>
+                        Por entregar
+                    </option>
+                    <option>
+                        En camino
+                    </option>
+                </select>
+              </div>
+            </form>
+            
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="actualizarRegistro()" *ngIf="actualizar">Actualizar</button>
+      </div>
+    </ng-template>
+  </div>
+</section>

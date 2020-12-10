@@ -4,15 +4,15 @@ import { User } from 'firebase';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
-  selector: 'app-perfil',
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.scss']
+  selector: 'app-admin-login',
+  templateUrl: './admin-login.component.html',
+  styleUrls: ['./admin-login.component.scss']
 })
-export class PerfilComponent implements OnInit {
+export class AdminLoginComponent implements OnInit {
+
   isAuthenticated = false;
   user: User = null;
 
-  admin = 'DnlaGnvf0TepuLv6kk4i0O3NfGw1';
   constructor(
     public authService: AuthService,
     public router: Router) { }
@@ -38,6 +38,4 @@ export class PerfilComponent implements OnInit {
       this.router.navigate(['/'])
     });
   }
-
-
 }

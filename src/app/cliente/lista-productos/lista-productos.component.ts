@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
-import { ProductoService } from 'src/app/services/producto.service';
 import { FirebaseService } from '../../services/firebase.service';
 
 @Component({
@@ -12,7 +11,7 @@ export class ListaProductosComponent implements OnInit {
 
   productosCollection = { count: 0, data: []}
 
-  constructor(private productoService: ProductoService,
+  constructor(
     private firebaseService: FirebaseService) { }
 
   ngOnInit() {

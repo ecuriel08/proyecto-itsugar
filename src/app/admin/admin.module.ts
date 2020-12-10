@@ -18,12 +18,13 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { PagosComponent } from './pagos/pagos.component';
 import { RegistrosComponent } from './registros/registros.component';
 import { RetiroComponent } from './retiro/retiro.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
 
 
 
 
 @NgModule({
-  declarations: [AdminLayoutComponent, CrearProductoComponent, AdminNavbarComponent, CategoriasComponent, PagosComponent, RegistrosComponent, RetiroComponent,],
+  declarations: [AdminLayoutComponent, CrearProductoComponent, AdminNavbarComponent, CategoriasComponent, PagosComponent, RegistrosComponent, RetiroComponent, AdminLoginComponent,],
   imports: [
     CommonModule,
     AdminRoutingModule,

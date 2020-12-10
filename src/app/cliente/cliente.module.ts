@@ -23,11 +23,12 @@ import { RegistrarseComponent } from './registrarse/registrarse.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { DetallesProductoComponent } from './detalles-producto/detalles-producto.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PagarComponent } from './pagar/pagar.component';
 
 
 
 @NgModule({
-  declarations: [CatalogoComponent, HomeComponent, CarritoComponent, NosotrosComponent, NavbarComponent, FooterComponent, ClienteLayoutComponent, ListaProductosComponent, FilterComponent, ItemsCarritoComponent, LoginComponent, RegistrarseComponent, PerfilComponent, DetallesProductoComponent],
+  declarations: [CatalogoComponent, HomeComponent, CarritoComponent, NosotrosComponent, NavbarComponent, FooterComponent, ClienteLayoutComponent, ListaProductosComponent, FilterComponent, ItemsCarritoComponent, LoginComponent, RegistrarseComponent, PerfilComponent, DetallesProductoComponent, PagarComponent,],
   imports: [
     CommonModule,
     ClienteRoutingModule,

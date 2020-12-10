@@ -13,11 +13,13 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from './services/auth.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Error404Component } from './error404/error404.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    Error404Component
   ],
   imports: [
     BrowserModule,
